@@ -1,6 +1,6 @@
-//var /starImg, fairyImg, bgImg;
-var fairy;
-var star, starBody;
+var starImg,bgImg,fairyImg;
+var star, starBody,fairy,fairyvoice,fairybody;
+//create variable for fairy sprite and fairyImg
 
 const Engine = Matter.Engine;
 const World = Matter.World;
@@ -9,29 +9,29 @@ const Body = Matter.Body;
 
 function preload()
 {
-	//starImg = loadImage("images/star.png");
-	//fairyImg = loadAnimation("images/fairyImage1.png","images/fairyImage2.png");
-	//bgImg = loadImage("images/starNight.png");
-	//fairyVoice = loadSound("sound/JoyMusic.mp3");
-
+	starImg = loadImage("star.png");
+	bgImg = loadImage("starNight.png");
+	//load animation for fairy here
+	fairyImg=loadAnimation("fairyImage1.png","fairyImage2.png");
+	fairyvoice=loadSound("joyMusic.mp3")
 }
 
 function setup() {
 	createCanvas(800, 750);
 
-	//fairyVoice.play();
+	//write code to play fairyVoice sound
+    //fairyvoice.addSound();
+	//create fairy sprite and add animation for fairy
+	fairy = createSprite(130,500);
+	fairy.addAnimation("fairyflying",fairyImg);
+	fairy.scale = 0.15;
 
-	fairy = createSprite(130, 520);
-	//fairy.addAnimation("fairyflying",fairyImg);  
-	fairy.scale =0.25;
-	/*
-	if (keyPressed = LEFT){
-		fairy.velocityX = -5;
-	}
-    */
 	star = createSprite(650,30);
-	//star.addImage(starImg);
+	star.addImage(starImg);
 	star.scale = 0.2;
+
+
+	
 
 	engine = Engine.create();
 	world = engine.world;
@@ -45,21 +45,24 @@ function setup() {
 
 
 function draw() {
-  background("white");
+  background(bgImg);
 
-  star.x = starBody.position.x;
-  star.y = starBody.position.y;
- 
+  star.x= starBody.position.x 
+  star.y= starBody.position.y 
+
+  console.log(star.y);
+
   if (star.y>470 && starBody.position.y>470){
-	  Matter.Body.setStatic(starBody,true);
-  }
-  
+	Matter.Body.setStatic(starBody,true);
+}
+  //write code to stop star in the hand of fairy
+  keyPressed();
   drawSprites();
 
 }
 
 function keyPressed() {
-	//write code here
+
 	if (keyCode === RIGHT_ARROW){
 		fairy.x = fairy.x+20;
 	}
@@ -71,8 +74,6 @@ function keyPressed() {
 	if (keyCode === DOWN_ARROW){
 		 Matter.Body.setStatic(starBody,false);
 	}
-
-
-    
+	//writw code to move fairy left and right
+	
 }
-
